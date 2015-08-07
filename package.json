@@ -1,0 +1,24 @@
+{
+  "name": "rulonder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "python -m SimpleHTTPServer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rulonder/rulonder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rulonder/rulonder/issues"
+  },
+  "homepage": "https://github.com/rulonder/rulonder#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-markdown": "^1.0.0"
+  }
+}
