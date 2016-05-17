@@ -1,0 +1,7 @@
+Hola
+{{name}}
+{% for item in items %}
+  <li{% if loop.first %} class="first"{% endif %}>
+    post {{ item.title }}
+  </li>
+{% endfor %}
