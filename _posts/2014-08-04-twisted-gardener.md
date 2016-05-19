@@ -14,7 +14,11 @@ The initial plan was to have a server providing the soil humidity data though in
 
 ## The implementation
 
-As a big fan of python I decided to use it for this development, as I need both serial communications and an http server, twisted was a nice framework , providing asynchronous capabilities. The downside is that I would need to stick with python 2.7.
+As a big fan of python I decided to use it for this development, as I need both serial communications and an http server, twisted was a nice framework , providing asynchronous capabilities. The downside is that I would need to stick with python 2.7. Another good point it is that twisted is easy to test and provides dedicated tools for this matter, although this can be seen as a drawback as it is increases your dependencies, increasing the complexity of the tests.
+
+As a big fan of python as I might be I however consider that for GUIs the most versatile solution is to use HTML & Javascript as it provides a multiplatform compatibility out of the box and a wide range of libraries and framework so you can easily customize the GUI with great freedom. Therefore I decided to use D3js in order to represent the data collected by the humidity sensors, this is a great library that offers great flexibility to visualize your data but on the other hand it is not as simple to use as other more limited solutions.
+
+
 
 
 

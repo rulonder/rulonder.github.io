@@ -5,6 +5,8 @@ tags: [msp430 microcontroller]
 color: '#949667'
 ---
 
+## TI Launchpad
+
 A few months ago I started using the TI Launchpad, which is a great piece of hardware for rapid prototyping. Nevertheless I found difficult to set it free, to let it fly solo, as there are few off-the-shelf options in order to provide the required voltage to this little board, so I decided to built my own one and this way learn a little about PCB design.
 
 ![](../../../../public/img/solar_shield/schema.png)
@@ -25,7 +27,7 @@ The battery is charged via a mini-usb port but I added an input for a solar pane
 
 Finally I added a switch in order to shutdown the power supply whenever is desired.
 
-### On the air
+## On the air
 
 I went a little bit further, so I mounted an air booster pack, plug in a solar panel to the board and packed everything in a plastic box so I can lay it outside, waterproof!! :) . With this configuration I was able to read external temperature from my computer and switch on the green led you see in the photo above. Nevertheless, the possibilities go beyond this simple example but I still have to learn how to use other features of the air booster pack and do some real programing. Unfortunately, at a first look documentation doesn't look very friendly :s.
 
