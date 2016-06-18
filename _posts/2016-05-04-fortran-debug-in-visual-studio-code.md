@@ -1,12 +1,13 @@
 ---
 layout: post
 title: Fortran debugging in OSx with visual studio code
+tags: [fortran debug gdb visualstudiocode]
 ---
 ## Debug fortran code in OSx
 
-I have recently switch to a macbook air from a lenovo, overall i am quite happy with the change, the macbook is a delight to use, you have the best of linux terminal and the best of windows user interface and programs e.g. office. No to mention the long lasting battery, it almost seems an engineering miracle.
+I have recently switch to a macbook air from a lenovo pc, overall I am quite happy with the change, the macbook is a delight to use, you have the best of linux terminal and the best of windows user interface and programs e.g. office. Not to mention the long lasting battery, it almost seems an engineering miracle.
 
-One of the programming languages I usually use is good old Fortran, so I wanted to keep using it in my mac. So the first step was to install gfortran, this was dumb simple using Homebrew to install gcc which includes gfortran.
+One of the programming languages I usually use is good old Fortran, so I wanted to keep using it in my Mac. So the first step was to install gfortran, this was dumb simple using Homebrew to install gcc which includes gfortran.
 
 ~~~
     brew install gcc
@@ -14,9 +15,11 @@ One of the programming languages I usually use is good old Fortran, so I wanted 
 
 ### Debugging with lldb (Fail)
 
-Great so now I can compile fortran programs. but usually I end up needing to debug them, one of my favorites editors currently is Visual Studio Code, I think microsoft is doing a great job with this piece of software, not to mention that is multiplatform. So after installing the fortran language extension I decided to move forward and add debugging capabilities. For that I decided to install the gdb plugin.
+Great so now I can compile fortran programs. but usually I end up needing to debug them, one of my favorites editors currently is Visual Studio Code, I think Microsoft is doing a great job with this piece of software, not to mention that is multiplatform. So after installing the fortran language extension I decided to move forward and add debugging capabilities. For that I decided to install the gdb plugin.
 
-After installing it and installing gdb through Homebrew my first surprise was that gdb didn't run properly on OSX, this was a little bit of dessilution on my new Mac, the are several workoround to make it work but are a little bit tedious and I my onw opinion not very clear and a little bit hacky. Fortunately there is another option besides gdb , that is lldb which is already installed in my Mac , please note that I have Xcode already installed so I do not know if it is part of the initial configuration or if it was installed with Xcode. So lets try with lldb. In order to make the lldb functinality avalible in Visual Studio Code, you need to make lldb-mi availble in your path, this can be achieved just creating a symbolic link to your /usr/bin folder.
+After installing it and gdb through Homebrew my first surprise was that gdb didn't run properly on OSX, this was a little bit of negative point for my new Mac, the are several workarounds to make it work but are a little bit tedious and I my own opinion not very clear and a little bit hacky. Fortunately, there is another option besides gdb , that is lldb which is already installed in my Mac , please note that I have Xcode already installed so I do not know if it is part of the initial configuration or if it was installed with Xcode. 
+
+So lets try with lldb. In order to make the lldb functionality available in Visual Studio Code, you need to make lldb-mi available in your path, this can be achieved just creating a symbolic link to your /usr/bin folder.
 
 ~~~
     ln -s /Applications/Xcode.app/Contents/Developer/usr/bin/lldb-mi /usr/local/bin/lldb-mi
@@ -52,7 +55,7 @@ First we are going to create a task to build the binary, this can be just a call
 }
 ~~~
 
-Then we are going to config our debug to use gdb and call the build right before with the "preLaunchTask" property.
+Then we are going to configure our debug configuration to use gdb and call the build right before with the "preLaunchTask" property.
 
 ~~~ json
 {
@@ -70,9 +73,11 @@ Then we are going to config our debug to use gdb and call the build right before
 }
 ~~~ 
 
-With this configuration we can debug and see some varibles, great! . However , there is still some pending functionalities, for instances arrays, pointers and othe non basiac types and structures are not properly displayed in the debugger.
+With this configuration we can debug and see some variables, great! . However , there is still some pending functionalities, for instances arrays, pointers and other non basic types and structures are not properly displayed in the debugger variable area. In order to be able to see pointers in the watch area you need to write them with a leading asterisk , otherwise it will show some hex number, probably the memory address.
 
-For instance a simple integer array will not properly displayed in the watch area. However you can still access the array values using the debug console avaliable. you can use the following commands:
+![](../../../../public/img/fortran/fortran_vs_debug.png)
+
+You can also access the array values using the debug console available. for example you can use the following commands:
 
 To access the first item of the array
 
@@ -86,29 +91,6 @@ To access the first 4 items of the array
  print *((integer *)array + 0)@4 
 ~~~
 
-![](../../../../public/img/fortran/fortran_vs_debug.png)
+Obviously these commands are not really user-friendly but it is handy to be be able to access the debug console.
 
-Obiously these commands are not really user friendly, and the debug experience in other IDEs such as visual studio with intel fortran are much more pleasant.
-
-
-
-## Debugging with Docker
-
-So OSx is not very friendly with the gdb debugging , but there are more options to debug our program. One of those is to use Docker, with a simple dockerfile we can get a running enviroment where we can compile and run our fortran program. Although it will be a linux binary , in some cases this  might even be desirable.
-
-So first we create a Dockerfile that can execute gfortran, gdb, and a ssh server. we need to expose the port 22.
-
-The port 22 will be port 222 in our system
-
-
-Then we configure the debug options to use gdb through ssh. we will use for this example user and password but a key can also be used. Note that X11 is disabled as our container is not able to run x11.
-
-Next thing is to prepare our dockerfile. for this we will use alpine as the baseline. Unfortunately the gdb loaded with alpine does not include gdbserver, so I have to relay on the manual compilation of gdb , although for this configuration we are not going to use the gdbserver.
-
-Besides we need to install the ssh server and create the necessary keys.
-
-With this configuration if you just try to build and run your image and debug some code on it you will notice that the debugger will not stop at your breakpoints although you will be able to run the program inside gdb. in order to allow gdb to stop the program execution at the desired break points you need to run the container with the --privileged flag.
-
-Note that as the copy files is in the docker file, it needs to be build each time.
-
-When running gdb in ssh take into account that the prelaunchtask will be run in the remote machine in this case inside the docker image.
+Although, the debug experience in other IDEs such as visual studio with intel fortran is much more pleasant, this is certainly useful and much more lightweight.
