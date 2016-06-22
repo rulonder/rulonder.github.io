@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Twisted gardener
+techs: [Python , plus,Arduino]
 ---
 
 ## The problem

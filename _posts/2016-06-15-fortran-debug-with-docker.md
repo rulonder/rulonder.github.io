@@ -1,8 +1,11 @@
 ---
 layout: post
 title: Fortran debugging with Docker in Visual Studio Code
-tags: [fortran debug gdb docker visualstudiocode]
+tags: [fortran ,debug ,gdb ,docker ,visualstudiocode]
+techs: [Docker , plus,Visual_code]
 ---
+
+
 ## Debugging with Docker
 
 As we saw in our earlier post OSx is not very friendly to set up with the gdb. But there are more options to debug our program. One of those is to use Docker, with a simple dockerfile we can get a running and reproducible enviroment where we can compile and run our fortran program. Although it will be a linux binary , in some cases this might even be desirable.
@@ -15,7 +18,7 @@ In order to have our source code available at the docker container, one option i
 
 
 
-~~~ Dockerfile
+~~~ bash 
 FROM alpine
 RUN apk update
 # we need make and linux-headers to compile gdb
@@ -71,7 +74,6 @@ Then we configure the debug options to use gdb through ssh. we will use for this
 ~~~ json
 {
     "version": "0.2.0",
-    // "preLaunchTask": "buildTask", executed inside the conatiner , not what I need 
     "cwd": "${workspaceRoot}",
     "configurations": [
         {
@@ -85,10 +87,8 @@ Then we configure the debug options to use gdb through ssh. we will use for this
                 "host": "127.0.0.1",
                 "port":222,
                 "cwd": "/usr/src/myapp/",
-                // "keyfile": "/path/to/.ssh/key", // OR
                 "password": "foo",
                 "user": "foo",
-                // Optional, content will be executed on the SSH host before the debugger call.
                 "bootstrap": "cd /usr/src/myapp/; gfortran -g -o foo main.f90"
             }
         }

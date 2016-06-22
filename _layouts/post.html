@@ -23,6 +23,14 @@ layout: default
     <span>{{ tags_content }}</span>
   </div>
   <hr/>
+  {% if post.techs %}
+  <div class="flex-tech-container">  
+  {% for post_tech in post.techs %}
+      <img style="height: 100%; width: auto;" src="../../../../public/img/logos/{{ post_tech }}.png" >
+      {% continue %}
+  {% endfor %}
+  </div>
+  {% endif %}
   {{ content }}
 </article>
 

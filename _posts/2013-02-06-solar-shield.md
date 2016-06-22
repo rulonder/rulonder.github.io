@@ -3,6 +3,7 @@ layout: post
 title: Solar shield
 tags: [msp430 microcontroller]
 color: '#949667'
+techs: [Launchpad]
 ---
 
 ## TI Launchpad

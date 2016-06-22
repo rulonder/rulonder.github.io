@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Fortran debugging in OSx with visual studio code
-tags: [fortran debug gdb visualstudiocode]
+tags: [fortran ,debug ,gdb ,visualstudiocode]
+techs: [Fortran , plus,Visual_code]
 ---
 ## Debug fortran code in OSx
 

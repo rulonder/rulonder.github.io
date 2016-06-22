@@ -3,6 +3,7 @@ layout: post
 title: GLSL Shaders 
 tags: [3d javascript glsl three.js]
 color: '#949667'
+techs: [WebGL]
 ---
 
 ## Using Shaders with THREE.js

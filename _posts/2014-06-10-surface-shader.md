@@ -3,6 +3,7 @@ layout: post
 title: Potential Field Sphere Shaders
 tags: [3d javascript glsl three.js]
 color: '#949667'
+techs: [WebGL]
 ---
 
 ## GLSL shaders and potetential fields

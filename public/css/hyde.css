@@ -15,7 +15,12 @@
  * Hijacked and adoped by @qwtel. Learn more at
  * http://hydejack.github.io
  */
-
+.flex-tech-container {
+    display: flex;
+    height: 80px;
+    justify-content: center; 
+    align-items: center; 
+}
 /* Icon font for github, twitter, etc */
 @font-face {
     font-family: 'icomoon';
